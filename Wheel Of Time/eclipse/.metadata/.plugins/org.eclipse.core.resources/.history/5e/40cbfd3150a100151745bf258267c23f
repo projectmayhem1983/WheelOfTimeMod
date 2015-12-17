@@ -1,0 +1,60 @@
+package projectmayhem1983.wheeloftime.entities.mobs;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.world.World;
+
+public class EntityAielMob extends EntityMob{
+
+	public EntityAielMob(World world) {
+		super(world);
+		this.setSize(1.0F, 2.0F);
+		this.getNavigator().setAvoidsWater(true);
+		this.tasks.addTask(0, new EntityAIWander(this, 0.5D));
+		this.tasks.addTask(1, EntityAIFollowParent(this, 1.1D));
+		this.setAttackTarget(1, PathfinderGoalHurtByTarget(this, true));
+		this.setAttackTarget(2, PathfinderGoalNearestAttackableTarget(this, Entity.class, 0, true));
+		
+		
+	}
+	public boolean isAIEnabled(){
+		return true;
+	}
+	
+	protected void applyEntityAttributes(){
+	super.applyEntityAttributes();
+	this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(16.0F);
+	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
+	}
+
+
+	private EntityLivingBase PathfinderGoalNearestAttackableTarget(EntityAielMob entityAielMob,
+			Class<Entity> class1, int i, boolean b) {
+		
+		return null;
+	}
+
+	private void setAttackTarget(int i, EntityLivingBase pathfinderGoalHurtByTarget) {
+		
+	}
+
+	private EntityLivingBase PathfinderGoalHurtByTarget(EntityAielMob entityAielMob, boolean b) {
+		
+		return null;
+	}
+
+	private EntityAIBase EntityAIFollowParent(EntityAielMob entityAielMob, double d) {
+		
+		return null;
+	}
+	public EntityAielMob createChild(EntityAgeable p_90011_1_){
+		return new EntityAielMob(worldObj);
+	}
+	
+
+}

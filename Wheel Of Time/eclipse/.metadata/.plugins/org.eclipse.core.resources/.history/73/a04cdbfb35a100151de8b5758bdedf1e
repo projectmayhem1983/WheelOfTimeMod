@@ -1,0 +1,23 @@
+package projectmayhem1983.wheeloftime;
+
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import net.minecraft.client.model.ModelBiped;
+import projectmayhem1983.wheeloftime.entity.EntityHuman;
+import projectmayhem1983.wheeloftime.rendering.entities.RenderHuman;
+
+public class CommonProxy {
+
+	int ModEntityID;
+	
+	public void registerRenderers(){
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityHuman.class, new RenderHuman(new ModelBiped(),0));
+	}
+		public void registerEntites(){
+			ModEntityID = EntityRegistry.findGlobalUniqueEntityId();
+			
+			EntityRegistry.registerModEntity(EntityHuman.class, "EntityHuman", ModEntityID++,WheelOfTime.class, 80, 1, false);
+		}
+	}
+

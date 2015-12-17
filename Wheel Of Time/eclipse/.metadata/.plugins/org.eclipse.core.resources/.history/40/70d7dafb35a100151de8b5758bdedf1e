@@ -1,0 +1,8 @@
+package projectmayhem1983.wheeloftime;
+
+public class CommonProxy {
+
+	public void registerRenderers(){
+		
+	}
+}

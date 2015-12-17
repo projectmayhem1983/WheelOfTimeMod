@@ -1,0 +1,38 @@
+package projectmayhem1983.wheeloftime.armor.whitecloak;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import projectmayhem1983.wheeloftime.WheelOfTime;
+
+public class whitecloakArmor extends ItemArmor{
+	private String[] armourTypes = new String [] {"whitecloakHelm", "whitecloakChest", "whitecloakLegs", "whitecloakBoots"};
+		
+	public whitecloakArmor(ArmorMaterial armorMaterial, int renderIndex, int armourType){
+		super(armorMaterial, renderIndex, armourType);
+	}
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String layer){
+		if     (stack.getItem().equals(WheelOfTime.whitecloakHelm) || 
+				stack.getItem().equals(WheelOfTime.whitecloakChest)||
+				stack.getItem().equals(WheelOfTime.whitecloakBoots)){
+			return "wot:whitecloak";
+		}
+		if (stack.equals(WheelOfTime.whitecloakLegs)){
+			return "wot:itemwhitecloaklegs";
+		}
+		else return null;
+	}
+	@Override 
+	public void registerIcons(IIconRegister reg){
+		if(this == WheelOfTime.whitecloakHelm)
+			this.itemIcon = reg.registerIcon("wot:itemwhitecloakhelm");
+		if(this == WheelOfTime.whitecloakChest)
+			this.itemIcon = reg.registerIcon("wot:itemwhitecloakchest");
+		if(this == WheelOfTime.whitecloakLegs)
+			this.itemIcon = reg.registerIcon("wot:itemwhitecloaklegs");
+		if(this == WheelOfTime.whitecloakBoots)
+			this.itemIcon = reg.registerIcon("wot:itemwhitecloakboots");
+	}
+}

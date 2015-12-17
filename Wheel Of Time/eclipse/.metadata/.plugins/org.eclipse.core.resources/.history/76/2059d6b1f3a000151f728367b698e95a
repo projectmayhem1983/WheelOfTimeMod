@@ -1,0 +1,25 @@
+item.ItemCuendillar.name=Cuendillar
+item.ItemDarkseal1.name=Seal One
+item.ItemDarkseal2.name=Seal Two
+item.ItemDarkseal3.name=Seal Three
+item.ItemDarkseal4.name=Seal Four
+item.ItemDarkseal5.name=Seal Five
+item.ItemDarkseal6.name=Seal Six
+item.ItemDarkseal7.name=Seal Seven
+item.ItemKafbean.name=Kaf Bean
+
+
+tile.BlockCuendillar.name=Cuendillar Block
+
+
+item.ItemKaf.name=Kaf
+item.ItemMotai.name=Motai
+
+item.ItemCuendillarPickaxe.name=Cuendillar Enhanced Pickaxe
+item.ItemCuendillarAxe.name=Cuendillar Enhanced Axe
+item.ItemCuendillarShovel.name=Cuendillar Enhanced Shovel
+item.ItemCuendillarHoe.name=Cuendillar Enhanced Hoe
+item.ItemCuendillarSword.name=Cuendillar Enhanced Sword
+
+
+itemGroup.tabWheelOfTime=Wheel Of Time

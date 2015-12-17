@@ -1,0 +1,12 @@
+package projectmayhem1983.wheeloftime.item;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemAxe;
+
+public class ItemCuendillarAxe extends ItemAxe {
+
+	protected ItemCuendillarAxe(ToolMaterial material) {
+		super(material);
+	}
+
+}

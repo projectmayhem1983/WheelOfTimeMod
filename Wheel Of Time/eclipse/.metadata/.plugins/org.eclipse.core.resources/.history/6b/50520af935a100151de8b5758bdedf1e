@@ -1,0 +1,15 @@
+package projectmayhem1983.wheeloftime;
+
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraft.client.model.ModelBiped;
+import projectmayhem1983.wheeloftime.entity.EntityHuman;
+import projectmayhem1983.wheeloftime.rendering.entities.RenderHuman;
+
+public class ClientProxy extends CommonProxy{
+
+public void registerRenderers(){
+	
+	RenderingRegistry.registerEntityRenderingHandler(EntityHuman.class, new RenderHuman(new ModelBiped(),0));
+		
+	}
+}

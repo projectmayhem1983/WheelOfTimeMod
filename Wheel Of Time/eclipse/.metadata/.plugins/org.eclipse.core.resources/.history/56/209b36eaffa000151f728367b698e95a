@@ -1,0 +1,11 @@
+package projectmayhem1983.wheeloftime;
+
+import net.minecraft.item.Item;
+
+public class ItemMotai extends Item {
+	public ItemMotai() {
+	
+		
+	}
+
+}

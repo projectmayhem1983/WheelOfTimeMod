@@ -1,0 +1,10 @@
+package projectmayhem1983.wheeloftime;
+
+import net.minecraft.item.Item;
+
+public class ItemDarkseal6 extends Item {
+	public ItemDarkseal6(){
+		this.setFull3D();
+		this.setMaxStackSize(1);
+	}
+}

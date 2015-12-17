@@ -1,0 +1,6 @@
+[19:20:09] [main/INFO]: Setting user: Player265
+[19:20:10] [Client thread/INFO]: LWJGL Version: 2.9.1
+[19:20:21] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Wheel of Time
+[19:20:24] [Sound Library Loader/INFO]: Sound engine started
+[19:20:24] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
+[19:20:24] [Client thread/INFO]: Created: 16x16 textures/items-atlas

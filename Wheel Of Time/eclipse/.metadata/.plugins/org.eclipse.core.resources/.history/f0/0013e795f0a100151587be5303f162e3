@@ -1,0 +1,8 @@
+package projectmayhem1983.wheeloftime;
+
+public class ProxyClient extends ProxyCommon{
+	public static void register_renderers(){
+		
+	}
+
+}

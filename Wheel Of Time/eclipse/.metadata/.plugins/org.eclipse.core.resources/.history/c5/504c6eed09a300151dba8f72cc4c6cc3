@@ -1,0 +1,21 @@
+package projectmayhem1983.wheeloftime.entities.creatures;
+
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.world.World;
+
+public class EntityMotaiMob extends EntityAnimal{
+
+	
+	public EntityMotaiMob(World world) {
+		super(world);
+	}
+
+	
+	@Override
+	public EntityAgeable createChild(EntityAgeable p_90011_1_) {
+		
+		return null;
+	}
+
+}

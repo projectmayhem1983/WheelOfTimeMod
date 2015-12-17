@@ -1,0 +1,14 @@
+package projectmayhem1983.wheeloftime;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+
+public class BlockPowerore extends Block {
+
+	protected BlockPowerore(Material material) {
+		super(material);
+		this.setHarvestLevel("pickaxe", 3);
+		this.setLightLevel(3.0F);
+	}
+
+}

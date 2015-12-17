@@ -1,0 +1,31 @@
+package taEventHandlers;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.World;
+import projectmayhem1983.wheeloftime.WheelOfTime;
+
+public class AngelEventHandler {
+
+	@SubscribeEvent
+	public void pTickEvent(PlayerTickEvent event) {
+		if (event.player != null) {
+			if (event.player instanceof EntityPlayer){
+				EntityPlayer player = ((EntityPlayer)event.player);
+				if(player.inventory.hasItem(WheelOfTime.itemAngelta) == false){
+					if(player.capabilities.allowFlying == true){
+						player.capabilities.allowFlying = false;
+					}
+					if(player.capabilities.isFlying == true){
+						player.capabilities.isFlying = false;
+					}
+				}
+			}
+		}
+	}
+
+}
