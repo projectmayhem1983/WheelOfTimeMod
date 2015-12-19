@@ -1,7 +1,0 @@
-package projectmayhem1983.wheeloftime;
-
-import net.minecraft.item.Item;
-
-public class ItemDarkseal3 extends Item{
-
-}

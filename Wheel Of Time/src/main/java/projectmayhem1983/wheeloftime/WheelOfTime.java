@@ -2,6 +2,7 @@ package projectmayhem1983.wheeloftime;
 
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Metadata;
@@ -19,24 +20,35 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.common.ChestGenHooks;
+import net.minecraft.world.WorldType;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
+import projectmayhem1983.wheeloftime.AngrealEventHandlers.AngelEventHandler;
+import projectmayhem1983.wheeloftime.armor.aielgarb.aielgarbArmor;
 import projectmayhem1983.wheeloftime.armor.whitecloak.whitecloakArmor;
+import projectmayhem1983.wheeloftime.biome.BiomeRegistry;
+import projectmayhem1983.wheeloftime.biome.WorldTypeWheelOfTime;
 import projectmayhem1983.wheeloftime.blocks.BlockCuendillar;
 import projectmayhem1983.wheeloftime.blocks.BlockPowerore;
+import projectmayhem1983.wheeloftime.entities.creatures.EntityGoat;
+import projectmayhem1983.wheeloftime.entities.creatures.EntityGoatMob;
 import projectmayhem1983.wheeloftime.entities.creatures.EntityMotai;
 import projectmayhem1983.wheeloftime.entities.creatures.EntityMotaiMob;
+import projectmayhem1983.wheeloftime.entities.creatures.GoatMob;
 import projectmayhem1983.wheeloftime.entities.creatures.MotaiMob;
+import projectmayhem1983.wheeloftime.entities.creatures.RenderGoatMob;
 import projectmayhem1983.wheeloftime.entities.creatures.RenderMotaiMob;
+import projectmayhem1983.wheeloftime.entities.mobs.AielMob;
+import projectmayhem1983.wheeloftime.entities.mobs.EntityAiel;
+import projectmayhem1983.wheeloftime.entities.mobs.EntityAielMob;
+import projectmayhem1983.wheeloftime.entities.mobs.EntityTrolloc;
+import projectmayhem1983.wheeloftime.entities.mobs.EntityTrollocMob;
+import projectmayhem1983.wheeloftime.entities.mobs.RenderAielMob;
+import projectmayhem1983.wheeloftime.entities.mobs.RenderTrollocMob;
+import projectmayhem1983.wheeloftime.entities.mobs.TrollocMob;
 import projectmayhem1983.wheeloftime.generation.PoweroreGeneration;
 import projectmayhem1983.wheeloftime.item.ItemAngelta;
 import projectmayhem1983.wheeloftime.item.ItemCuendillar;
-import projectmayhem1983.wheeloftime.item.ItemCuendillarAxe;
-import projectmayhem1983.wheeloftime.item.ItemCuendillarHoe;
-import projectmayhem1983.wheeloftime.item.ItemCuendillarPickaxe;
-import projectmayhem1983.wheeloftime.item.ItemCuendillarShovel;
-import projectmayhem1983.wheeloftime.item.ItemCuendillarSword;
 import projectmayhem1983.wheeloftime.item.ItemDarkseal1;
 import projectmayhem1983.wheeloftime.item.ItemDarkseal2;
 import projectmayhem1983.wheeloftime.item.ItemDarkseal3;
@@ -45,20 +57,25 @@ import projectmayhem1983.wheeloftime.item.ItemDarkseal5;
 import projectmayhem1983.wheeloftime.item.ItemDarkseal6;
 import projectmayhem1983.wheeloftime.item.ItemDarkseal7;
 import projectmayhem1983.wheeloftime.item.ItemFountainta;
+import projectmayhem1983.wheeloftime.item.ItemGoathide;
+import projectmayhem1983.wheeloftime.item.ItemGoatmeat;
+import projectmayhem1983.wheeloftime.item.ItemKafbean;
+import projectmayhem1983.wheeloftime.item.ItemPowerAxe;
+import projectmayhem1983.wheeloftime.item.ItemPowerHoe;
+import projectmayhem1983.wheeloftime.item.ItemPowerPickaxe;
+import projectmayhem1983.wheeloftime.item.ItemPowerShovel;
+import projectmayhem1983.wheeloftime.item.ItemPowerSword;
 import projectmayhem1983.wheeloftime.item.ItemPowerdust;
+import projectmayhem1983.wheeloftime.item.ItemPowerinfusedingot;
 import projectmayhem1983.wheeloftime.item.ItemSunburst;
 import projectmayhem1983.wheeloftime.item.ItemTabard;
 import projectmayhem1983.wheeloftime.item.ItemWctabard;
 import projectmayhem1983.wheeloftime.item.ItemWheeloftime;
-import projectmayhem1983.wheeloftime.item.itemCuendillaringot;
-import projectmayhem1983.wheeloftime.item.itemKafbean;
 
-@Mod(modid = WheelOfTime.MODID, name = "Wheel of Time", version = WheelOfTime.VERSION)
+@Mod(modid = "wot", name = "Wheel of Time", version = "1.0")
 public class WheelOfTime {
 	
-	public static final String MODID = "wot";
-	public static final String VERSION = "1.0";
-	
+		
 	@Metadata
 	public static ModMetadata meta;
 	
@@ -73,13 +90,15 @@ public class WheelOfTime {
 		public static Item itemDarkseal7;
 		public static Item itemKafbean;
 		public static Item itemWheeloftime;
-		public static Item itemCuendillaringot;
+		public static Item itemPowerinfusedingot;
 		public static Item itemPowerdust;
 		public static Item itemAngelta;
 		public static Item itemFountainta;
 		public static Item itemSunburst;
 		public static Item itemTabard;
 		public static Item itemWctabard;
+		public static Item itemGoathide;
+		public static Item itemGoatmeat;
 		
 		
 		
@@ -90,15 +109,16 @@ public class WheelOfTime {
 	//Food
 		public static Item itemKaf;
 		public static Item itemMotai;
+		public static Item itemCookedgoat;
 		
 	//Tools
-		public static Item cuendillarPickaxe;
-		public static Item cuendillarAxe;
-		public static Item cuendillarShovel;
-		public static Item cuendillarHoe;
+		public static Item powerPickaxe;
+		public static Item powerAxe;
+		public static Item powerShovel;
+		public static Item powerHoe;
 		
 	//Weapons
-		public static Item cuendillarSword;
+		public static Item powerSword;
 		
 	//Armor
 		public static Item whitecloakChest;
@@ -106,20 +126,30 @@ public class WheelOfTime {
 		public static Item whitecloakHelm;
 		public static Item whitecloakLegs;
 		
+		public static Item aielgarbChest;
+		public static Item aielgarbBoots;
+		public static Item aielgarbHelm;
+		public static Item aielgarbLegs;
+		
 	//Material
 		public static final Item.ToolMaterial cuendillarToolMaterial = EnumHelper.addToolMaterial("cuendillarToolMaterial", 4, 3000, 12.0F, 5.0F, 40);
 		public static final ArmorMaterial enumArmorMaterialWhitecloak = EnumHelper.addArmorMaterial("Whitecloak", 20, new int[]{3, 6, 6, 3}, 15);
-	
-			    
+		public static final ArmorMaterial enumArmorMaterialAielgarb = EnumHelper.addArmorMaterial("Aielgarb", 9, new int[]{1, 4, 2, 2}, 15);
+	   
+		@EventHandler
 		public void preInit(FMLPreInitializationEvent event){
 		//Item/Block init and registering
 		//Config handling
 		
 		//Armor Prefixes
 		RenderingRegistry.addNewArmourRendererPrefix("5");
+		RenderingRegistry.addNewArmourRendererPrefix("6");
 		
 		//Mob Rendering
 		RenderingRegistry.registerEntityRenderingHandler(EntityMotaiMob.class, new RenderMotaiMob(new MotaiMob(),0));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTrollocMob.class, new RenderTrollocMob(new TrollocMob(),0));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAielMob.class, new RenderAielMob(new AielMob(),0));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGoatMob.class, new RenderGoatMob(new GoatMob(),0));
 		
 		//Items
 		
@@ -150,11 +180,11 @@ public class WheelOfTime {
 	    itemDarkseal7 = new ItemDarkseal7().setUnlocalizedName("ItemDarkseal7").setTextureName("wot:itemdarkseal").setCreativeTab(tabWheelOfTime);
 	    GameRegistry.registerItem(itemDarkseal7, itemDarkseal7.getUnlocalizedName().substring(5));
 	    
-	    itemKafbean = new itemKafbean().setUnlocalizedName("ItemKafbean").setTextureName("wot:itemkafbean").setCreativeTab(tabWheelOfTime);
+	    itemKafbean = new ItemKafbean().setUnlocalizedName("ItemKafbean").setTextureName("wot:itemkafbean").setCreativeTab(tabWheelOfTime);
 	    GameRegistry.registerItem(itemKafbean, itemKafbean.getUnlocalizedName().substring(5));
 	    
-	    itemCuendillaringot = new itemCuendillaringot().setUnlocalizedName("ItemCuendillaringot").setTextureName("wot:itemcuendillaringot").setCreativeTab(tabWheelOfTime);
-	    GameRegistry.registerItem(itemCuendillaringot, itemCuendillaringot.getUnlocalizedName().substring(5));
+	    itemPowerinfusedingot = new ItemPowerinfusedingot().setUnlocalizedName("ItemPowerinfusedingot").setTextureName("wot:itempowerinfusedingot").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(itemPowerinfusedingot, itemPowerinfusedingot.getUnlocalizedName().substring(5));
 	    
 	    itemPowerdust = new ItemPowerdust().setUnlocalizedName("ItemPowerdust").setTextureName("wot:itempowerdust").setCreativeTab(tabWheelOfTime);
 	    GameRegistry.registerItem(itemPowerdust, itemPowerdust.getUnlocalizedName().substring(5));
@@ -174,6 +204,14 @@ public class WheelOfTime {
 	    itemWctabard = new ItemWctabard().setUnlocalizedName("ItemWctabard").setTextureName("wot:itemwctabard").setCreativeTab(tabWheelOfTime);
 	    GameRegistry.registerItem(itemWctabard, itemWctabard.getUnlocalizedName().substring(5));
 	    
+	    itemGoathide = new ItemGoathide().setUnlocalizedName("ItemGoathide").setTextureName("wot:itemgoathide").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(itemGoathide, itemGoathide.getUnlocalizedName().substring(5));
+	    
+	    itemGoatmeat = new ItemGoatmeat().setUnlocalizedName("ItemGoatmeat").setTextureName("wot:itemgoatmeat").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(itemGoatmeat, itemGoatmeat.getUnlocalizedName().substring(5));
+	    
+	    
+	    
 	    //Blocks
 	    blockCuendillar = new BlockCuendillar(Material.iron).setBlockName("BlockCuendillar").setBlockTextureName("wot:blockcuendillar").setCreativeTab(tabWheelOfTime);
 	    GameRegistry.registerBlock(blockCuendillar, blockCuendillar.getUnlocalizedName().substring(5));
@@ -188,24 +226,27 @@ public class WheelOfTime {
 	    itemMotai = new ItemFood(4, 0.3F, false).setUnlocalizedName("ItemMotai").setTextureName("wot:itemmotai").setCreativeTab(tabWheelOfTime);
 	    GameRegistry.registerItem(itemMotai, itemMotai.getUnlocalizedName().substring(5));
 	    
+	    itemCookedgoat = new ItemFood(6, 0.5F, true).setUnlocalizedName("ItemCookedgoat").setTextureName("wot:itemcookedgoat").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(itemCookedgoat, itemCookedgoat.getUnlocalizedName().substring(5));
+	    
 	    //Tools
 	    
-	    cuendillarPickaxe = new ItemCuendillarPickaxe(cuendillarToolMaterial).setUnlocalizedName("ItemCuendillarPickaxe").setTextureName("wot:itemcuendillarpickaxe").setCreativeTab(tabWheelOfTime);
-	    GameRegistry.registerItem(cuendillarPickaxe, cuendillarPickaxe.getUnlocalizedName().substring(5));
+	    powerPickaxe = new ItemPowerPickaxe(cuendillarToolMaterial).setUnlocalizedName("ItemPowerPickaxe").setTextureName("wot:itemcuendillarpickaxe").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(powerPickaxe, powerPickaxe.getUnlocalizedName().substring(5));
 	    
-	    cuendillarAxe = new ItemCuendillarAxe(cuendillarToolMaterial).setUnlocalizedName("ItemCuendillarAxe").setTextureName("wot:itemcuendillaraxe").setCreativeTab(tabWheelOfTime);
-	    GameRegistry.registerItem(cuendillarAxe, cuendillarAxe.getUnlocalizedName().substring(5));
+	    powerAxe = new ItemPowerAxe(cuendillarToolMaterial).setUnlocalizedName("ItemPowerAxe").setTextureName("wot:itemcuendillaraxe").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(powerAxe, powerAxe.getUnlocalizedName().substring(5));
 	    
-	    cuendillarShovel = new ItemCuendillarShovel(cuendillarToolMaterial).setUnlocalizedName("ItemCuendillarShovel").setTextureName("wot:itemcuendillarshovel").setCreativeTab(tabWheelOfTime);
-	    GameRegistry.registerItem(cuendillarShovel, cuendillarShovel.getUnlocalizedName().substring(5));
+	    powerShovel = new ItemPowerShovel(cuendillarToolMaterial).setUnlocalizedName("ItemPowerShovel").setTextureName("wot:itemcuendillarshovel").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(powerShovel, powerShovel.getUnlocalizedName().substring(5));
 	    
-	    cuendillarHoe = new ItemCuendillarHoe(cuendillarToolMaterial).setUnlocalizedName("ItemCuendillarHoe").setTextureName("wot:itemcuendillarhoe").setCreativeTab(tabWheelOfTime);
-	    GameRegistry.registerItem(cuendillarHoe, cuendillarHoe.getUnlocalizedName().substring(5));
+	    powerHoe = new ItemPowerHoe(cuendillarToolMaterial).setUnlocalizedName("ItemPowerHoe").setTextureName("wot:itemcuendillarhoe").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(powerHoe, powerHoe.getUnlocalizedName().substring(5));
 	    
 	    //Weapons
 	    
-	    cuendillarSword = new ItemCuendillarSword(cuendillarToolMaterial).setUnlocalizedName("ItemCuendillarSword").setTextureName("wot:itemcuendillarsword").setCreativeTab(tabWheelOfTime);
-	    GameRegistry.registerItem(cuendillarSword, cuendillarSword.getUnlocalizedName().substring(5));
+	    powerSword = new ItemPowerSword(cuendillarToolMaterial).setUnlocalizedName("ItemPowerSword").setTextureName("wot:itemcuendillarsword").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(powerSword, powerSword.getUnlocalizedName().substring(5));
 	    
 	    //Armor
 	    
@@ -221,13 +262,29 @@ public class WheelOfTime {
 	    whitecloakBoots = new whitecloakArmor(WheelOfTime.enumArmorMaterialWhitecloak,5,3).setUnlocalizedName("ItemwhitecloakBoots").setTextureName("wot:itemwhitecloakboots").setCreativeTab(tabWheelOfTime);
 	    GameRegistry.registerItem(whitecloakBoots, whitecloakBoots.getUnlocalizedName().substring(5));
 	    
+	    aielgarbHelm = new aielgarbArmor(WheelOfTime.enumArmorMaterialAielgarb,6,0).setUnlocalizedName("ItemaielgarbHelm").setTextureName("wot:itemaielgarbhelm").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(aielgarbHelm, aielgarbHelm.getUnlocalizedName().substring(5));
+	    
+	    aielgarbChest = new aielgarbArmor(WheelOfTime.enumArmorMaterialAielgarb,6,1).setUnlocalizedName("ItemaielgarbChest").setTextureName("wot:itemaielgarbchest").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(aielgarbChest, aielgarbChest.getUnlocalizedName().substring(5));
+	    
+	    aielgarbLegs= new aielgarbArmor(WheelOfTime.enumArmorMaterialAielgarb,6,2).setUnlocalizedName("ItemaielgarbLegs").setTextureName("wot:itemaielgarblegs").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(aielgarbLegs, aielgarbLegs.getUnlocalizedName().substring(5));
+	    
+	    aielgarbBoots = new aielgarbArmor(WheelOfTime.enumArmorMaterialAielgarb,6,3).setUnlocalizedName("ItemaielgarbBoots").setTextureName("wot:itemaielgarbboots").setCreativeTab(tabWheelOfTime);
+	    GameRegistry.registerItem(aielgarbBoots, aielgarbBoots.getUnlocalizedName().substring(5));
 	    
 	    //World Gen
 	    GameRegistry.registerWorldGenerator(new PoweroreGeneration(), 0);
 	    
 	    //Entities
 	    EntityMotai.WheelOfTime();
+	    EntityTrolloc.WheelOfTime();
+	    EntityAiel.WheelOfTime();
+	    EntityGoat.WheelOfTime();
 	    
+	    //Biomes
+	    BiomeRegistry.WheelOfTime();
 	}
 	
 	@EventHandler
@@ -237,24 +294,30 @@ public class WheelOfTime {
 		//Recipes
 		GameRegistry.addRecipe(new ItemStack(blockCuendillar), new Object[]{"CCC","CCC","CCC",'C',WheelOfTime.itemCuendillar});
 		GameRegistry.addRecipe(new ItemStack(itemKaf), new Object[]{"KKK","KBK","KKK",'K',WheelOfTime.itemKafbean, 'B', Items.water_bucket});
-		GameRegistry.addRecipe(new ItemStack(cuendillarSword), new Object[]{" C "," C "," S ",'C',WheelOfTime.itemCuendillaringot,'S',Items.stick});
-		GameRegistry.addRecipe(new ItemStack(cuendillarPickaxe), new Object[]{"CCC"," S "," S ",'C',WheelOfTime.itemCuendillaringot,'S',Items.stick});
-		GameRegistry.addRecipe(new ItemStack(cuendillarAxe), new Object[]{"CC ","CS "," S ",'C',WheelOfTime.itemCuendillaringot,'S',Items.stick});
-		GameRegistry.addRecipe(new ItemStack(cuendillarShovel), new Object[]{" C "," S "," S ",'C',WheelOfTime.itemCuendillaringot,'S',Items.stick});
-		GameRegistry.addRecipe(new ItemStack(cuendillarHoe), new Object[]{"CC "," S "," S ",'C',WheelOfTime.itemCuendillaringot,'S',Items.stick});
-		GameRegistry.addRecipe(new ItemStack(itemCuendillaringot), new Object[]{" D "," C "," E ",'D',Items.diamond,'C', WheelOfTime.itemCuendillar,'E',Items.emerald});
-		GameRegistry.addRecipe(new ItemStack(itemSunburst), new Object[]{" G ","GGG"," G ",'G',Items.gold_nugget,});
+		GameRegistry.addRecipe(new ItemStack(powerSword), new Object[]{" C "," C "," S ",'C',WheelOfTime.itemPowerinfusedingot,'S',Items.stick});
+		GameRegistry.addRecipe(new ItemStack(powerPickaxe), new Object[]{"CCC"," S "," S ",'C',WheelOfTime.itemPowerinfusedingot,'S',Items.stick});
+		GameRegistry.addRecipe(new ItemStack(powerAxe), new Object[]{"CC ","CS "," S ",'C',WheelOfTime.itemPowerinfusedingot,'S',Items.stick});
+		GameRegistry.addRecipe(new ItemStack(powerShovel), new Object[]{" C "," S "," S ",'C',WheelOfTime.itemPowerinfusedingot,'S',Items.stick});
+		GameRegistry.addRecipe(new ItemStack(powerHoe), new Object[]{"CC "," S "," S ",'C',WheelOfTime.itemPowerinfusedingot,'S',Items.stick});
+		GameRegistry.addRecipe(new ItemStack(itemSunburst), new Object[]{" G ","GGG"," G ",'G',Items.gold_nugget});
 		GameRegistry.addRecipe(new ItemStack(itemTabard), new Object[]{"W W","WWW","WWW",'W',Blocks.wool});
-		GameRegistry.addRecipe(new ItemStack(itemWctabard), new Object[]{"  ","TS ","  ",'T',WheelOfTime.itemTabard,'S',WheelOfTime.itemSunburst});
-	    GameRegistry.addRecipe(new ItemStack(whitecloakChest), new Object[]{"W  ","I  ","  ",'I',Items.iron_chestplate,'W',WheelOfTime.itemWctabard});
-		GameRegistry.addRecipe(new ItemStack(whitecloakHelm), new Object[]{"I  ","S  ","  ",'I',Items.iron_helmet,'S',WheelOfTime.itemSunburst});
-		GameRegistry.addRecipe(new ItemStack(whitecloakBoots), new Object[]{"I  ","S  ","  ",'I',Items.iron_boots,'S',WheelOfTime.itemSunburst});
-		GameRegistry.addRecipe(new ItemStack(whitecloakLegs), new Object[]{"I  ","S  ","  ",'I',Items.iron_leggings,'S',WheelOfTime.itemSunburst});
 		
-		//Adding to dungeon chest loot 1-100 , 1 being most rare
+		GameRegistry.addRecipe(new ItemStack(aielgarbChest), new Object[]{"Q Q","QQQ","QQQ",'Q',Items.leather});
+		GameRegistry.addRecipe(new ItemStack(aielgarbHelm), new Object[]{"  ","QQQ","Q Q",'Q',Items.leather});
+		GameRegistry.addRecipe(new ItemStack(aielgarbLegs), new Object[]{"QQQ","Q Q","Q Q",'Q',Items.leather});
+		GameRegistry.addRecipe(new ItemStack(aielgarbBoots), new Object[]{"  ","Q Q","Q Q",'Q',Items.leather});
 		
-		//ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(WheelOfTime.itemAngelta),1,0,1));
-		//ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(WheelOfTime.itemFountainta),1,0,1));
+		GameRegistry.addShapelessRecipe(new ItemStack(itemWctabard), new Object[]{WheelOfTime.itemTabard,WheelOfTime.itemSunburst});
+	    GameRegistry.addShapelessRecipe(new ItemStack(whitecloakChest), new Object[]{Items.iron_chestplate,WheelOfTime.itemWctabard});
+		GameRegistry.addShapelessRecipe(new ItemStack(whitecloakBoots), new Object[]{Items.iron_boots,WheelOfTime.itemSunburst});
+		GameRegistry.addShapelessRecipe(new ItemStack(whitecloakLegs), new Object[]{Items.iron_leggings,WheelOfTime.itemSunburst});
+		GameRegistry.addShapelessRecipe(new ItemStack(whitecloakHelm), new Object[]{Items.iron_helmet,WheelOfTime.itemSunburst});
+		
+		
+		//Furnace  
+		GameRegistry.addSmelting(itemPowerdust, new ItemStack(itemPowerinfusedingot), 5.0F);
+		GameRegistry.addSmelting(itemGoatmeat, new ItemStack(itemCookedgoat), 1.0F);
+		
 	}
 		
 		
@@ -263,6 +326,10 @@ public class WheelOfTime {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event){
+		FMLCommonHandler.instance().bus().register(new AngelEventHandler());
+		MinecraftForge.EVENT_BUS.register(new AngelEventHandler());
+
+		WorldType WheelOfTime = new WorldTypeWheelOfTime(3, "WheelOfTime");
 		
 	}
 	

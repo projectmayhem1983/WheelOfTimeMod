@@ -1,7 +1,0 @@
-package projectmayhem1983.wheeloftime;
-
-import net.minecraft.block.Block;
-
-public class BlockPowerore extends Block {
-
-}

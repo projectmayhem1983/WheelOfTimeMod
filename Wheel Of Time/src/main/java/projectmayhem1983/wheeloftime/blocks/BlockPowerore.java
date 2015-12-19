@@ -12,7 +12,6 @@ public class BlockPowerore extends Block {
 	public BlockPowerore(Material material) {
 		super(material);
 		this.setHarvestLevel("pickaxe", 3);
-		this.setLightLevel(3.0F);
 		this.setHardness(1.0F);
 	}
 
