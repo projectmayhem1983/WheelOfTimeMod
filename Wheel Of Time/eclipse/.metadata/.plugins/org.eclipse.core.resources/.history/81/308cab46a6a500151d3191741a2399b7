@@ -1,0 +1,40 @@
+item.ItemCuendillar.name=Cuendillar
+item.ItemDarkseal1.name=Seal One
+item.ItemDarkseal2.name=Seal Two
+item.ItemDarkseal3.name=Seal Three
+item.ItemDarkseal4.name=Seal Four
+item.ItemDarkseal5.name=Seal Five
+item.ItemDarkseal6.name=Seal Six
+item.ItemDarkseal7.name=Seal Seven
+item.ItemKafbean.name=Kaf Bean
+item.ItemPowerinfusedingot.name=Power Infused Ingot
+item.ItemPowerdust.name=Power Dust
+item.ItemAngelta.name=Angel Ter'Angreal
+item.ItemFountainta.name=Fountain Ter'Angreal
+item.ItemSunburst.name=Sunburst Emblem
+item.ItemTabard.name=Plain Tabard
+item.ItemWctabard.name=Whitecloak Tabard
+
+tile.BlockCuendillar.name=Cuendillar Block
+tile.BlockPowerore.name=Power Infused Ore
+
+
+item.ItemKaf.name=Kaf
+item.ItemMotai.name=Motai
+
+item.ItemPowerPickaxe.name=Power Enhanced Pickaxe
+item.ItemPowerAxe.name=Power Enhanced Axe
+item.ItemPowerShovel.name=Power Enhanced Shovel
+item.ItemPowerHoe.name=Power Enhanced Hoe
+item.ItemPowerSword.name=Power Enhanced Sword
+
+item.ItemwhitecloakHelm.name=Whitecloak Helmet
+item.ItemwhitecloakBoots.name=Whitecloak Boots
+item.ItemwhitecloakChest.name=Whitecloak Breastplate
+item.ItemwhitecloakLegs.name=Whitecloak Leggings
+
+itemGroup.tabWheelOfTime=Wheel Of Time
+
+entity.Trolloc Mob.name=Trolloc
+
+worldtype.WheelOfTime.name=Wheel Of Time

@@ -1,0 +1,7 @@
+package projectmayhem1983.wheeloftime.armor.aielgarb;
+
+import net.minecraft.item.Item;
+
+public class ItemaielgarbHelm extends Item{
+
+}

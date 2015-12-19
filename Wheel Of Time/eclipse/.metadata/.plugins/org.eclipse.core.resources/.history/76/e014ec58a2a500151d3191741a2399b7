@@ -1,0 +1,10 @@
+package projectmayhem1983.wheeloftime.biome;
+
+import net.minecraft.world.biome.BiomeGenBase;
+
+public class BiomeGenBlight extends BiomeGenBase {
+
+	public BiomeGenBlight(int id){
+		super(id);
+	}
+}

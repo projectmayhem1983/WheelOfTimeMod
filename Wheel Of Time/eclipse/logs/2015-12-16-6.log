@@ -1,0 +1,15 @@
+[20:35:08] [main/INFO]: Setting user: Player419
+[20:35:10] [Client thread/INFO]: LWJGL Version: 2.9.1
+[20:35:20] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Wheel of Time
+[20:35:21] [Sound Library Loader/INFO]: Sound engine started
+[20:35:23] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
+[20:35:23] [Client thread/INFO]: Created: 16x16 textures/items-atlas
+[20:35:23] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Wheel of Time
+[20:35:23] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[20:35:24] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[20:35:24] [Sound Library Loader/INFO]: Sound engine started
+[20:35:25] [Client thread/ERROR]: ########## GL ERROR ##########
+[20:35:25] [Client thread/ERROR]: @ Post startup
+[20:35:25] [Client thread/ERROR]: 1281: Invalid value
+[20:35:27] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[20:35:27] [Server thread/INFO]: Generating keypair
