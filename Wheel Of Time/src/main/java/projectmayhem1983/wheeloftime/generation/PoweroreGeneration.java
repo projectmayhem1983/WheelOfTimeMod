@@ -8,7 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import projectmayhem1983.wheeloftime.WheelOfTime;
+import projectmayhem1983.wheeloftime.init.WheelOfTimeBlocks;
 
 public class PoweroreGeneration implements IWorldGenerator {
 
@@ -29,15 +29,15 @@ public class PoweroreGeneration implements IWorldGenerator {
 	}
 
 	public void generateNether(World world, Random rand, int x, int z) {
-		generateOre(WheelOfTime.blockPowerore, world, rand, x, z, 2, 10, 5, 0, 100, Blocks.netherrack);
+		generateOre(WheelOfTimeBlocks.blockPowerore, world, rand, x, z, 2, 10, 5, 0, 10, Blocks.netherrack);
 	}
 
 	public void generateOverworld(World world, Random rand, int x, int z) {
-		generateOre(WheelOfTime.blockPowerore, world, rand, x, z, 2, 10, 5, 0, 100, Blocks.stone);
+		generateOre(WheelOfTimeBlocks.blockPowerore, world, rand, x, z, 2, 10, 5, 0, 10, Blocks.stone);
 	}
 
 	public void generateEnd(World world, Random rand, int x, int z) {
-		generateOre(WheelOfTime.blockPowerore, world, rand, x, z, 2, 10, 5, 0, 100, Blocks.end_stone);
+		generateOre(WheelOfTimeBlocks.blockPowerore, world, rand, x, z, 2, 10, 5, 0, 10, Blocks.end_stone);
 	}
 
 	public void generateOre(Block block, World world, Random random, int chunkX, int chunkZ, int minVienSize,

@@ -8,6 +8,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import projectmayhem1983.wheeloftime.WheelOfTime;
+import projectmayhem1983.wheeloftime.init.WheelOfTimeItems;
 
 public class AngelEventHandler {
 	@SubscribeEvent
@@ -19,7 +20,7 @@ public class AngelEventHandler {
 					return; // this prevents from disabling fly to people in
 							// creative
 				player.capabilities.isFlying = player.capabilities.allowFlying = player.inventory
-						.hasItem(WheelOfTime.itemAngelta);
+						.hasItem(WheelOfTimeItems.itemAngelta);
 			}
 		}
 	}

@@ -7,7 +7,6 @@ public class ItemPowerSword extends ItemSword {
 
 	public ItemPowerSword(ToolMaterial material) {
 		super(material);
-		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -1,4 +1,4 @@
-item.ItemCuendillar.name=Cuendillar
+item.ItemCuendillar.name=Cuendillar Shard
 item.ItemDarkseal1.name=Seal One
 item.ItemDarkseal2.name=Seal Two
 item.ItemDarkseal3.name=Seal Three
@@ -14,19 +14,33 @@ item.ItemFountainta.name=Fountain Ter'Angreal
 item.ItemSunburst.name=Sunburst Emblem
 item.ItemTabard.name=Plain Tabard
 item.ItemWctabard.name=Whitecloak Tabard
+item.ItemGoatmeat.name=Raw Goat Meat
+item.ItemGoathide.name=Goat Hide
+item.ItemUnbrewedKaf.name=Unbrewed Kaf
+item.ItemUncookedmeatpie.name=Uncooked Meatpie
+item.ItemGrain.name=Grain
 
 tile.BlockCuendillar.name=Cuendillar Block
 tile.BlockPowerore.name=Power Infused Ore
+tile.BlockIcePeppers.name=Saldaean Ice Peppers
 
 
 item.ItemKaf.name=Kaf
 item.ItemMotai.name=Motai
+item.ItemCookedgoat.name=Cooked Goat
+item.ItemGoatstew.name=Goat Stew
+item.ItemIcePepper.name=Saldaean Ice Pepper
+item.ItemPepperbeefstew.name= Saldaean Peppered Beef Stew
+item.ItemFishstew.name=Altaran Fish Stew
+item.ItemMeatpie.name=Baked Meat Pie
+item.ItemPorridge.name=Porridge
 
 item.ItemPowerPickaxe.name=Power Enhanced Pickaxe
 item.ItemPowerAxe.name=Power Enhanced Axe
 item.ItemPowerShovel.name=Power Enhanced Shovel
 item.ItemPowerHoe.name=Power Enhanced Hoe
 item.ItemPowerSword.name=Power Enhanced Sword
+item.ItemSpear.name=Aiel Spear
 
 item.ItemwhitecloakHelm.name=Whitecloak Helmet
 item.ItemwhitecloakBoots.name=Whitecloak Boots
@@ -43,5 +57,10 @@ itemGroup.tabWheelOfTime=Wheel Of Time
 entity.Trolloc Mob.name=Trolloc
 entity.Motai Mob.name=Motai
 entity.Aiel Mob.name=Aiel
+entity.Darkhound Mob.name=Darkhound
+entity.Goat Mob.name=Goat
+entity.Myrddraal Mob.name=Myrddraal
+entity.Damane Mob.name=Sul'dam and Damane
+entity.Whitecloak Mob.name=Whitecloak
 
 generator.WheelOfTime=Wheel Of Time
